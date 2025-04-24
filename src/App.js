@@ -1,27 +1,23 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import Header from "./components/Header";
-import LandingSection from "./components/LandingSection";
-import ProjectsSection from "./components/ProjectsSection";
-import ContactMeSection from "./components/ContactMeSection";
-import Footer from "./components/Footer";
-import { AlertProvider } from "./context/alertContext";
-import Alert from "./components/Alert";
+// Path: src/App.js
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Home from './pages/Home';
 
-function App() {
+const App = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Animation duration (ms)
+      once: true, // Animate only once
+      mirror: false, // Don't animate out
+    });
+  }, []);
+
   return (
-    <ChakraProvider>
-      <AlertProvider>
-        <main>
-          <Header />
-          <LandingSection />
-          <ProjectsSection />
-          <ContactMeSection />
-          <Footer />
-          <Alert />
-        </main>
-      </AlertProvider>
-    </ChakraProvider>
+    <div>
+      <Home />
+    </div>
   );
-}
+};
 
 export default App;

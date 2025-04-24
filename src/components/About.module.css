@@ -1,0 +1,177 @@
+/* Path: src/components/About.module.css */
+.about {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  background: var(--bg-color);
+  height: auto;
+  min-height: fit-content;
+}
+
+.about h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  text-shadow: 0 0 5px var(--accent-color); /* Neon glow for Delix vibe */
+}
+
+.content {
+  max-width: 1000px; /* Wider max-width to spread text */
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem); /* More padding on sides */
+}
+
+.text {
+  text-align: justify; /* Distribute text evenly across the width */
+  color: var(--text-color);
+  padding: 1.5rem 0; /* More vertical padding, less on sides */
+}
+
+.text p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  margin-bottom: 1.5rem; /* More space between paragraphs */
+  line-height: 1.8;
+  max-width: 900px; /* Slightly narrower than .content for readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text h3 {
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
+  margin: 2.5rem 0 1.5rem; /* More space around h3 */
+  color: var(--text-color);
+  text-shadow: 0 0 3px var(--accent-color);
+}
+
+.skills {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 900px; /* Match paragraph width */
+  display: flex;
+  flex-wrap: wrap; /* Allow skills to wrap */
+  justify-content: space-around; /* Distribute skills evenly */
+  gap: 1rem; /* Space between skill items */
+}
+
+.skills li {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  margin: 0.5rem 0; /* Reduced margin since gap handles spacing */
+  padding-left: 2rem;
+  position: relative;
+  transition: transform 0.3s ease;
+  flex: 1 1 300px; /* Allow skills to grow/shrink, min 300px */
+  text-align: left; /* Align text left within each skill item */
+}
+
+.skills li:hover {
+  transform: translateX(5px);
+}
+
+.skills li::before {
+  content: '✨';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+}
+
+.image {
+  margin: 0 auto 2rem;
+  width: clamp(120px, 20vw, 150px);
+  height: clamp(120px, 20vw, 150px);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-color);
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.profileImage:hover {
+  transform: scale(1.05);
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .about {
+    padding: 2rem 1rem;
+  }
+  .about h2 {
+    font-size: 1.8rem;
+  }
+  .content {
+    padding: 0 0.5rem;
+  }
+  .text {
+    text-align: left; /* Left-align on small screens for better readability */
+    padding: 1rem 0;
+  }
+  .text p {
+    font-size: 0.9rem;
+    max-width: 100%; /* Full width on small screens */
+  }
+  .text h3 {
+    font-size: 1.3rem;
+  }
+  .skills {
+    flex-direction: column; /* Stack skills vertically */
+    gap: 0.5rem;
+    max-width: 100%;
+  }
+  .skills li {
+    font-size: 0.9rem;
+    flex: 1 1 auto; /* Full width on small screens */
+  }
+  .image {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Medium screens */
+@media (min-width: 601px) and (max-width: 1199px) {
+  .content {
+    max-width: 700px;
+  }
+  .text p {
+    max-width: 600px;
+  }
+  .skills {
+    max-width: 600px;
+  }
+  .image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Wide screens */
+@media (min-width: 1200px) {
+  .about {
+    padding: 5rem 3rem;
+  }
+  .about h2 {
+    font-size: 3rem;
+  }
+  .content {
+    max-width: 1000px;
+  }
+  .text p {
+    max-width: 900px;
+  }
+  .skills {
+    max-width: 900px;
+  }
+  .image {
+    width: 150px;
+    height: 150px;
+  }
+}

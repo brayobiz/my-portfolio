@@ -1,0 +1,303 @@
+/* Path: src/components/Nav.module.css */
+
+/* Theme Variables */
+:global([data-theme='light']) {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --accent-color: #00aaff; /* Delix-inspired neon */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme='dark']) {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --accent-color: #00ccff;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth transitions for theme changes */
+:global(html) {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+:global([data-theme='light'] *) {
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+:global([data-theme='dark'] *) {
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  z-index: 1000;
+}
+
+/* Logo */
+.logoImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Rounded logo */
+  object-fit: cover;
+  box-shadow: 0 0 8px var(--accent-color); /* Neon glow */
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+}
+
+.nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--accent-color);
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-color);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Actions (Toggle, Social, Hamburger) */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Theme Toggle */
+.themeToggle {
+  position: relative;
+  width: 48px;
+  height: 24px;
+}
+
+.themeToggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--text-color);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  padding: 0 2px;
+}
+
+.themeToggle input:checked + .slider {
+  background: #333;
+  box-shadow: 0 0 8px var(--accent-color); /* Neon glow */
+}
+
+.themeIcon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  color: var(--accent-color);
+  transition: transform 0.3s ease;
+}
+
+.themeToggle input:checked + .slider .themeIcon {
+  transform: translateX(24px); /* Slide to right (dark mode) */
+}
+
+.themeToggle input:not(:checked) + .slider .themeIcon {
+  transform: translateX(0); /* Slide to left (light mode) */
+}
+
+.themeToggle input:focus + .slider {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Animation on click */
+.themeToggle.toggling .slider {
+  transform: scale(0.95); /* Subtle scale effect on click */
+}
+
+.themeToggle.toggling .themeIcon {
+  animation: rotateIcon 0.5s ease forwards; /* Rotate icon on click */
+}
+
+@keyframes rotateIcon {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(12px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(24px) rotate(360deg);
+  }
+}
+
+.themeToggle.toggling input:not(:checked) + .slider .themeIcon {
+  animation: rotateIconReverse 0.5s ease forwards; /* Reverse for light mode */
+}
+
+@keyframes rotateIconReverse {
+  0% {
+    transform: translateX(24px) rotate(0deg);
+  }
+  50% {
+    transform: translateX(12px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(0) rotate(360deg);
+  }
+}
+
+/* Social Link */
+.socialLink {
+  display: inline-block;
+}
+
+.socialIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.socialLink:hover .socialIcon {
+  color: var(--accent-color);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.open .hamburger span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.open .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+
+.open .hamburger span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth close animation */
+  }
+
+  .open {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Default for light mode */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    animation: slideDown 0.3s ease;
+    z-index: 1000;
+  }
+
+  :global([data-theme='dark']) .open {
+    background: rgba(26, 26, 26, 0.1); /* Adjusted for dark mode */
+  }
+
+  .nav.open ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav.open a {
+    opacity: 1;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  :global([data-theme='light']) .nav.open a {
+    color: #fff; /* White text for better contrast in light mode */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Darker shadow for readability */
+  }
+
+  :global([data-theme='light']) .nav.open a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+  }
+
+  :global([data-theme='dark']) .nav.open a {
+    color: var(--text-color); /* Keep white text for dark mode */
+    text-shadow: 0 0 5px var(--accent-color); /* Neon glow for visibility */
+  }
+
+  :global([data-theme='dark']) .nav.open a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

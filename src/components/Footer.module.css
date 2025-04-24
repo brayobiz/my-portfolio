@@ -1,0 +1,358 @@
+/* Path: src/components/Footer.module.css */
+.footer {
+  padding: clamp(2rem, 5vw, 3rem) 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid #00c4ff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footerContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  width: 100%;
+  max-width: clamp(320px, 90vw, 1200px);
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Ensure "Follow Me" and "Address" stack in the same column on small devices */
+.footerColumn:nth-child(2),
+.footerColumn:nth-child(3) {
+  grid-column: 2;
+}
+
+.footerColumn:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.columnTitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.navLink {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #555;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navLink:hover {
+  color: #00c4ff;
+  transform: scale(1.05);
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(40px, 1fr));
+  gap: clamp(0.5rem, 2vw, 1rem);
+  justify-items: center;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(40px, 5vw, 48px);
+  height: clamp(40px, 5vw, 48px);
+  border-radius: 50%;
+  border: 2px solid #00c4ff;
+  color: #00c4ff;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 196, 255, 0.3);
+}
+
+.socialLink:hover {
+  color: #ff33cc;
+  border-color: #ff33cc;
+  box-shadow: 0 0 20px #ff33cc;
+  transform: scale(1.1);
+}
+
+.socialIcon {
+  width: clamp(20px, 3vw, 24px);
+  height: clamp(20px, 3vw, 24px);
+}
+
+.address {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #555;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.copyright {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #555;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.backToTop {
+  position: fixed;
+  bottom: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
+  background: #fff;
+  border: 2px solid #00c4ff;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(48px, 6vw, 56px);
+  height: clamp(48px, 6vw, 56px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 196, 255, 0.3);
+}
+
+.backToTopIcon {
+  width: clamp(32px, 4vw, 40px);
+  height: clamp(32px, 4vw, 40px);
+  color: #00c4ff;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.backToTop:hover .backToTopIcon {
+  color: #ff33cc;
+  box-shadow: 0 0 25px #ff33cc;
+  transform: scale(1.1);
+}
+
+/* Small screens (320px and below) */
+@media (max-width: 400px) {
+  .footer {
+    padding: 1.5rem 0;
+    gap: 1rem;
+  }
+  .footerContent {
+    gap: 1rem;
+  }
+  .columnTitle {
+    font-size: 1rem;
+  }
+  .navList {
+    gap: 0.5rem;
+  }
+  .navLink {
+    font-size: 0.85rem;
+  }
+  .socialGrid {
+    grid-template-columns: repeat(2, minmax(36px, 1fr));
+    gap: 0.5rem;
+    max-width: 160px;
+  }
+  .socialLink {
+    width: 36px;
+    height: 36px;
+  }
+  .socialIcon {
+    width: 18px;
+    height: 18px;
+  }
+  .address {
+    font-size: 0.85rem;
+  }
+  .copyright {
+    font-size: 0.85rem;
+  }
+  .backToTop {
+    width: 48px;
+    height: 48px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .backToTopIcon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Small screens (401px to 600px) */
+@media (min-width: 401px) and (max-width: 600px) {
+  .footer {
+    padding: 2rem 0;
+    gap: 1.25rem;
+  }
+  .footerContent {
+    gap: 1.25rem;
+  }
+  .columnTitle {
+    font-size: 1.1rem;
+  }
+  .navLink {
+    font-size: 0.9rem;
+  }
+  .socialGrid {
+    grid-template-columns: repeat(2, minmax(40px, 1fr));
+    gap: 0.75rem;
+    max-width: 180px;
+  }
+  .socialLink {
+    width: 40px;
+    height: 40px;
+  }
+  .socialIcon {
+    width: 20px;
+    height: 20px;
+  }
+  .address {
+    font-size: 0.9rem;
+  }
+  .copyright {
+    font-size: 0.9rem;
+  }
+  .backToTop {
+    width: 48px;
+    height: 48px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  .backToTopIcon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Medium screens (601px to 1199px) */
+@media (min-width: 601px) and (max-width: 1199px) {
+  .footer {
+    padding: 2.5rem 0;
+    gap: 1.5rem;
+  }
+  .footerContent {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .footerColumn {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footerColumn:nth-child(2),
+  .footerColumn:nth-child(3) {
+    grid-column: auto;
+  }
+  .footerColumn:nth-child(1) {
+    grid-row: auto;
+  }
+  .columnTitle {
+    font-size: 1.2rem;
+  }
+  .navLink {
+    font-size: 0.95rem;
+  }
+  .socialGrid {
+    grid-template-columns: repeat(2, minmax(44px, 1fr));
+    gap: 0.75rem;
+    max-width: 200px;
+  }
+  .socialLink {
+    width: 44px;
+    height: 44px;
+  }
+  .socialIcon {
+    width: 22px;
+    height: 22px;
+  }
+  .address {
+    font-size: 0.95rem;
+  }
+  .copyright {
+    font-size: 0.95rem;
+  }
+  .backToTop {
+    width: 52px;
+    height: 52px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  .backToTopIcon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Wide screens (1200px and above) */
+@media (min-width: 1200px) {
+  .footer {
+    padding: 3rem 0;
+    gap: 2rem;
+  }
+  .footerContent {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .footerColumn {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .footerColumn:nth-child(2),
+  .footerColumn:nth-child(3) {
+    grid-column: auto;
+  }
+  .footerColumn:nth-child(1) {
+    grid-row: auto;
+  }
+  .columnTitle {
+    font-size: 1.5rem;
+  }
+  .navLink {
+    font-size: 1rem;
+  }
+  .socialGrid {
+    grid-template-columns: repeat(2, minmax(48px, 1fr));
+    gap: 1rem;
+    max-width: 220px;
+  }
+  .socialLink {
+    width: 48px;
+    height: 48px;
+  }
+  .socialIcon {
+    width: 24px;
+    height: 24px;
+  }
+  .address {
+    font-size: 1rem;
+  }
+  .copyright {
+    font-size: 1rem;
+  }
+  .backToTop {
+    width: 56px;
+    height: 56px;
+    bottom: 2rem;
+    right: 2rem;
+  }
+  .backToTopIcon {
+    width: 40px;
+    height: 40px;
+  }
+}

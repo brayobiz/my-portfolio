@@ -1,0 +1,184 @@
+/* Path: src/components/Projects.module.css */
+.projects {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  background: var(--bg-color);
+  height: auto; /* Fit content */
+  min-height: fit-content; /* Ensure minimum height */
+  overflow: hidden; /* Prevent overflow issues */
+}
+
+.projects h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+.swiper {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 4rem 3rem; /* Adjusted padding to accommodate arrows */
+  overflow: hidden; /* Prevent overflow causing zoom */
+  box-sizing: border-box;
+  touch-action: pan-x; /* Allow horizontal swipe only */
+  position: relative; /* Ensure arrows are positioned relative to swiper */
+}
+
+.card {
+  background: var(--bg-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  width: clamp(200px, 90%, 300px);
+  max-width: 100%;
+  margin: 0 auto;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.thumbnail {
+  width: 100%;
+  height: clamp(120px, 20vw, 150px);
+  object-fit: cover;
+}
+
+.card h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin: 1rem;
+  color: var(--text-color);
+}
+
+.card p {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  margin: 0 1rem 1.5rem;
+  color: var(--text-color);
+}
+
+.link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
+  background: var(--accent-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.link:hover {
+  background: #ff33cc; /* Neon pink for hover, Delix vibe */
+}
+
+/* Swiper navigation and pagination */
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  color: var(--accent-color); /* Neon color (#00aaff light, #00ccff dark) */
+  width: clamp(30px, 6vw, 40px); /* Slightly larger for visibility */
+  height: clamp(30px, 6vw, 40px);
+  background: rgba(255, 255, 255, 0.8); /* White background for contrast */
+  border: 2px solid var(--accent-color); /* Neon border */
+  border-radius: 50%; /* Cute, rounded arrows */
+  display: flex; /* Ensure visibility */
+  align-items: center;
+  justify-content: center;
+  opacity: 1; /* Full opacity for visibility */
+  transition: background 0.3s ease, transform 0.3s ease;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for perfect centering */
+  z-index: 10; /* Ensure arrows are above other elements */
+  position: absolute; /* Explicit positioning */
+}
+
+:global(.swiper-button-next:hover),
+:global(.swiper-button-prev:hover) {
+  background: var(--accent-color); /* Neon background on hover */
+  color: #fff; /* White arrow on hover */
+  transform: translateY(-50%) scale(1.1); /* Slight scale for cute effect */
+}
+
+:global(.swiper-button-next::after),
+:global(.swiper-button-prev::after) {
+  font-size: clamp(18px, 3vw, 24px); /* Slightly larger arrows */
+  font-weight: bold; /* Thicker arrows for cute look */
+}
+
+:global(.swiper-button-prev) {
+  left: 10px; /* Move inside the container to avoid clipping */
+}
+
+:global(.swiper-button-next) {
+  right: 10px; /* Move inside the container to avoid clipping */
+}
+
+:global(.swiper-pagination-bullet) {
+  background: var(--text-color);
+  opacity: 0.5;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background: var(--accent-color);
+  opacity: 1;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .projects {
+    padding: 2rem 1rem;
+  }
+  .projects h2 {
+    font-size: 1.5rem;
+  }
+  .card {
+    width: 90%;
+  }
+  .card h3 {
+    font-size: 1.2rem;
+  }
+  .card p {
+    font-size: 0.875rem;
+  }
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    width: 30px;
+    height: 30px;
+  }
+  :global(.swiper-button-next::after),
+  :global(.swiper-button-prev::after) {
+    font-size: 18px;
+  }
+  :global(.swiper-button-prev) {
+    left: 5px; /* Adjust for smaller screens */
+  }
+  :global(.swiper-button-next) {
+    right: 5px; /* Adjust for smaller screens */
+  }
+}
+
+/* Wide screens */
+@media (min-width: 1200px) {
+  .projects {
+    padding: 5rem 3rem;
+  }
+  .projects h2 {
+    font-size: 3rem;
+  }
+  .card {
+    width: 300px;
+  }
+  .swiper {
+    padding: 0 5rem 3rem; /* Extra padding for arrows on wide screens */
+  }
+  :global(.swiper-button-prev) {
+    left: 15px; /* Slightly more inset for wide screens */
+  }
+  :global(.swiper-button-next) {
+    right: 15px; /* Slightly more inset for wide screens */
+  }
+}

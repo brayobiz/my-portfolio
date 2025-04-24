@@ -1,0 +1,135 @@
+/* Path: src/components/Services.module.css */
+.services {
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  text-align: center;
+  background: var(--bg-color);
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  margin-bottom: clamp(5rem, 8vw, 6rem);
+  padding: 1rem 0 2rem;
+  width: 100%;
+  max-width: clamp(300px, 90vw, 800px);
+}
+
+.header h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  text-shadow: 0 0 10px var(--accent-color);
+  font-weight: 700;
+}
+
+.header p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: clamp(300px, 98vw, 1200px);
+  margin: 0 auto;
+}
+
+.serviceCard {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid var(--accent-color);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--accent-color);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--accent-color);
+}
+
+.serviceCard h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 5px var(--accent-color);
+}
+
+.serviceCard p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .services {
+    padding: 2rem 0;
+  }
+  .header {
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+  }
+  .header h2 {
+    font-size: 1.8rem;
+  }
+  .header p {
+    font-size: 0.9rem;
+  }
+  .servicesGrid {
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+  .serviceCard {
+    padding: 1.5rem;
+  }
+  .icon {
+    font-size: 2.5rem;
+  }
+  .serviceCard h3 {
+    font-size: 1.2rem;
+  }
+  .serviceCard p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Medium screens */
+@media (min-width: 601px) and (max-width: 1199px) {
+  .services {
+    padding: 3rem 0;
+  }
+  .header {
+    margin-bottom: 4rem;
+  }
+  .servicesGrid {
+    gap: 1.5rem;
+    max-width: 98%;
+  }
+}
+
+/* Wide screens (Desktop mode) */
+@media (min-width: 1200px) {
+  .services {
+    padding: 4rem 0;
+  }
+  .header {
+    margin-bottom: 5rem;
+  }
+  .servicesGrid {
+    gap: 2rem;
+    max-width: 1200px;
+  }
+}
