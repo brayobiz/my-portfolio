@@ -54,7 +54,7 @@ const Projects = () => {
             />
             <h3>Delix Restaurant App</h3>
             <p>Futuristic reservation app built with React and Django.</p>
-            <a href="https://delix.example.com" className={styles.link}>
+            <a href="https://delixrestaurant.vercel.app" className={styles.link}>
               View Live
             </a>
           </div>

@@ -6,7 +6,7 @@ const Blog = () => {
     {
       title: 'Building a Restaurant Reservation App with a Galaxy Theme',
       excerpt: 'In this post, I share my journey of creating the Delix Restaurant app, a futuristic reservation platform with a galaxy-inspired design using React and Firebase.',
-      thumbnail: 'assets/images/delix-1.jpg', // Placeholder image
+      thumbnail: 'assets/images/delix-1.jpeg', // Placeholder image
       date: 'April 15, 2025',
       link: '#', // Placeholder link (update with actual blog post URL)
     },
