@@ -1,86 +1,34 @@
-/* Path: src/components/About.module.css */
 .about {
-  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
-  text-align: center;
-  background: var(--bg-color);
-  height: auto;
-  min-height: fit-content;
-}
-
-.about h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  margin-bottom: 1.5rem;
+  background: radial-gradient(circle at top left, #f8f9ff, #eef0ff 60%, #ffffff);
+  padding: clamp(3rem, 6vw, 6rem) 1.5rem;
   color: var(--text-color);
-  text-shadow: 0 0 5px var(--accent-color); /* Neon glow for Delix vibe */
-}
-
-.content {
-  max-width: 1000px; /* Wider max-width to spread text */
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 3vw, 2rem); /* More padding on sides */
-}
-
-.text {
-  text-align: justify; /* Distribute text evenly across the width */
-  color: var(--text-color);
-  padding: 1.5rem 0; /* More vertical padding, less on sides */
-}
-
-.text p {
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
-  margin-bottom: 1.5rem; /* More space between paragraphs */
-  line-height: 1.8;
-  max-width: 900px; /* Slightly narrower than .content for readability */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.text h3 {
-  font-size: clamp(1.5rem, 3vw, 1.8rem);
-  margin: 2.5rem 0 1.5rem; /* More space around h3 */
-  color: var(--text-color);
-  text-shadow: 0 0 3px var(--accent-color);
-}
-
-.skills {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 900px; /* Match paragraph width */
   display: flex;
-  flex-wrap: wrap; /* Allow skills to wrap */
-  justify-content: space-around; /* Distribute skills evenly */
-  gap: 1rem; /* Space between skill items */
+  justify-content: center;
 }
 
-.skills li {
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-  margin: 0.5rem 0; /* Reduced margin since gap handles spacing */
-  padding-left: 2rem;
-  position: relative;
-  transition: transform 0.3s ease;
-  flex: 1 1 300px; /* Allow skills to grow/shrink, min 300px */
-  text-align: left; /* Align text left within each skill item */
+.container {
+  max-width: 1100px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 4rem);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.skills li:hover {
-  transform: translateX(5px);
-}
-
-.skills li::before {
-  content: '✨';
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
-  font-size: 1.2rem;
+.container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 60px rgba(100, 108, 255, 0.2);
 }
 
 .image {
   margin: 0 auto 2rem;
-  width: clamp(120px, 20vw, 150px);
-  height: clamp(120px, 20vw, 150px);
+  width: clamp(140px, 18vw, 170px);
+  height: clamp(140px, 18vw, 170px);
   border-radius: 50%;
   overflow: hidden;
+  box-shadow: 0 0 25px rgba(100, 108, 255, 0.3);
 }
 
 .profileImage {
@@ -88,90 +36,122 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid var(--accent-color);
-  box-shadow: 0 0 15px var(--accent-color);
-  transition: transform 0.3s ease;
-  display: block;
+  border: 3px solid rgba(100, 108, 255, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .profileImage:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  box-shadow: 0 0 30px rgba(100, 108, 255, 0.4);
 }
 
-/* Small screens */
-@media (max-width: 600px) {
-  .about {
-    padding: 2rem 1rem;
-  }
-  .about h2 {
-    font-size: 1.8rem;
-  }
-  .content {
-    padding: 0 0.5rem;
-  }
-  .text {
-    text-align: left; /* Left-align on small screens for better readability */
-    padding: 1rem 0;
-  }
-  .text p {
-    font-size: 0.9rem;
-    max-width: 100%; /* Full width on small screens */
-  }
-  .text h3 {
-    font-size: 1.3rem;
-  }
-  .skills {
-    flex-direction: column; /* Stack skills vertically */
-    gap: 0.5rem;
-    max-width: 100%;
-  }
-  .skills li {
-    font-size: 0.9rem;
-    flex: 1 1 auto; /* Full width on small screens */
-  }
-  .image {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 1.5rem;
-  }
+.textBlock {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Medium screens */
-@media (min-width: 601px) and (max-width: 1199px) {
-  .content {
-    max-width: 700px;
-  }
-  .text p {
-    max-width: 600px;
-  }
-  .skills {
-    max-width: 600px;
-  }
-  .image {
-    width: 140px;
-    height: 140px;
-  }
+h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(90deg, #1a1a1a, #646cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
 }
 
-/* Wide screens */
-@media (min-width: 1200px) {
-  .about {
-    padding: 5rem 3rem;
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: #646cff;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.intro {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(100, 108, 255, 0.15);
+}
+
+.card h3 {
+  color: #1a1a1a;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  border-left: 4px solid #646cff;
+  padding-left: 0.6rem;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card li {
+  margin-bottom: 0.8rem;
+  color: #444;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.card li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: #646cff;
+  font-weight: bold;
+}
+
+.closing {
+  text-align: center;
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.7;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
   }
-  .about h2 {
-    font-size: 3rem;
+  .intro {
+    text-align: left;
   }
-  .content {
-    max-width: 1000px;
+  .sections {
+    grid-template-columns: 1fr;
   }
-  .text p {
-    max-width: 900px;
+  .textBlock {
+    text-align: left;
   }
-  .skills {
-    max-width: 900px;
-  }
-  .image {
-    width: 150px;
-    height: 150px;
+  h2,
+  .subtitle {
+    text-align: center;
   }
 }
