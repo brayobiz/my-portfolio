@@ -1,51 +1,58 @@
-// Path: src/components/Services.js
+import { Code, Smartphone, Palette, Rocket } from 'lucide-react';
 import styles from './Services.module.css';
 
 const Services = () => {
   const services = [
     {
       title: 'Web Development',
-      description: 'I create responsive, futuristic websites with a touch of magic, like my Delix Restaurant app, inspired by a galaxy theme. Skilled in React, HTML/CSS, and JavaScript.',
-      icon: '🌐', // Placeholder icon (replace with an actual icon/image later)
+      description:
+        'Building fast, responsive, and visually stunning websites using React, HTML, CSS, and JavaScript — designed to look perfect on every device.',
+      icon: <Code />,
+    },
+    {
+      title: 'Mobile App Development',
+      description:
+        'Developing cross-platform mobile apps with Flutter — one codebase for both Android and iOS with high performance and elegant UI.',
+      icon: <Smartphone />,
     },
     {
       title: 'UI/UX Design',
-      description: 'I design user-friendly interfaces with a keen eye for detail, using tools like Figma to craft delightful experiences that users love.',
-      icon: '🎨',
+      description:
+        'Designing intuitive and visually engaging interfaces in Figma — ensuring every interaction feels natural and purposeful.',
+      icon: <Palette />,
     },
     {
-      title: 'Backend Development',
-      description: 'I build robust backends with Django and Firebase, ensuring your applications are secure, scalable, and efficient—like KU Hub for Kenyatta University students.',
-      icon: '⚙️',
-    },
-    {
-      title: 'Bug Fixing & Optimization',
-      description: 'I specialize in debugging and optimizing web applications, ensuring they run smoothly and efficiently, with a knack for email template creation.',
-      icon: '🐞',
+      title: 'Optimization & Maintenance',
+      description:
+        'Improving speed, SEO, and scalability. From debugging to performance tuning, I ensure your site runs flawlessly.',
+      icon: <Rocket />,
     },
   ];
 
   return (
     <section id="services" className={styles.services} data-aos="fade-up">
-      <div className={styles.header}>
-        <h2 data-aos="zoom-in">My Services</h2>
-        <p data-aos="fade-up" data-aos-delay="100">
-          Here’s what I can do for you—let’s bring your ideas to life!
+      <div className={styles.container}>
+        <h2 data-aos="fade-up" data-aos-delay="100">
+          My Services
+        </h2>
+        <p className={styles.subtitle} data-aos="fade-up" data-aos-delay="200">
+          Turning your ideas into smooth, high-performing digital experiences.
         </p>
-      </div>
-      <div className={styles.servicesGrid}>
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className={styles.serviceCard}
-            data-aos="fade-up"
-            data-aos-delay={200 + index * 100}
-          >
-            <div className={styles.icon}>{service.icon}</div>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </div>
-        ))}
+
+        <div className={styles.grid}>
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className={styles.card}
+              data-aos="fade-up"
+              data-aos-delay={300 + index * 100}
+            >
+              <div className={styles.iconWrapper}>{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

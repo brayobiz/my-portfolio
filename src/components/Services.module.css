@@ -1,135 +1,108 @@
-/* Path: src/components/Services.module.css */
 .services {
-  padding: clamp(2rem, 5vw, 4rem) 0;
-  text-align: center;
-  background: var(--bg-color);
-  min-height: fit-content;
+  background: radial-gradient(circle at top left, #f8f9ff, #eef0ff 60%, #ffffff);
+  padding: clamp(3rem, 6vw, 6rem) 1.5rem;
+  color: var(--text-color);
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
-.header {
-  margin-bottom: clamp(5rem, 8vw, 6rem);
-  padding: 1rem 0 2rem;
+.container {
+  max-width: 1100px;
   width: 100%;
-  max-width: clamp(300px, 90vw, 800px);
-}
-
-.header h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 1rem;
-  color: var(--text-color);
-  text-shadow: 0 0 10px var(--accent-color);
-  font-weight: 700;
-}
-
-.header p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-
-.servicesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  width: 100%;
-  max-width: clamp(300px, 98vw, 1200px);
-  margin: 0 auto;
-}
-
-.serviceCard {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  padding: 2rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 4rem);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
   text-align: center;
-  border: 1px solid var(--accent-color);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.serviceCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px var(--accent-color);
+.container h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(90deg, #1a1a1a, #646cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
 }
 
-.icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px var(--accent-color);
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  color: #646cff;
+  margin-bottom: 3rem;
+  font-weight: 600;
 }
 
-.serviceCard h3 {
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(100, 108, 255, 0.2);
+}
+
+.iconWrapper {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #646cff, #8a8cff);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 20px rgba(100, 108, 255, 0.3);
+  color: white;
+}
+
+.iconWrapper svg {
+  width: 28px;
+  height: 28px;
+}
+
+.card h3 {
   font-size: clamp(1.2rem, 3vw, 1.5rem);
-  color: var(--text-color);
-  margin-bottom: 1rem;
-  text-shadow: 0 0 5px var(--accent-color);
+  color: #1a1a1a;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #1a1a1a, #646cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.serviceCard p {
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  color: var(--text-color);
+.card p {
+  font-size: clamp(0.95rem, 2vw, 1rem);
+  color: #444;
   line-height: 1.6;
 }
 
-/* Small screens */
-@media (max-width: 600px) {
-  .services {
-    padding: 2rem 0;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
   }
-  .header {
-    margin-bottom: 3rem;
-    padding-bottom: 1rem;
-  }
-  .header h2 {
-    font-size: 1.8rem;
-  }
-  .header p {
-    font-size: 0.9rem;
-  }
-  .servicesGrid {
-    gap: 1.5rem;
-    max-width: 100%;
-  }
-  .serviceCard {
-    padding: 1.5rem;
-  }
-  .icon {
-    font-size: 2.5rem;
-  }
-  .serviceCard h3 {
-    font-size: 1.2rem;
-  }
-  .serviceCard p {
-    font-size: 0.9rem;
-  }
-}
 
-/* Medium screens */
-@media (min-width: 601px) and (max-width: 1199px) {
-  .services {
-    padding: 3rem 0;
+  .grid {
+    grid-template-columns: 1fr;
   }
-  .header {
-    margin-bottom: 4rem;
-  }
-  .servicesGrid {
-    gap: 1.5rem;
-    max-width: 98%;
-  }
-}
 
-/* Wide screens (Desktop mode) */
-@media (min-width: 1200px) {
-  .services {
-    padding: 4rem 0;
+  .card {
+    text-align: center;
   }
-  .header {
-    margin-bottom: 5rem;
-  }
-  .servicesGrid {
-    gap: 2rem;
-    max-width: 1200px;
+
+  .iconWrapper {
+    margin: 0 auto 1rem;
   }
 }
