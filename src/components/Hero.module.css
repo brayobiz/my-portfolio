@@ -1,81 +1,254 @@
-/* Path: src/components/Hero.module.css */
+/* src/components/Hero.module.css */
 .hero {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
 }
 
 .heroBg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
+  z-index: -2;
+  filter: brightness(0.7);
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(100,108,255,0.2), rgba(255,105,180,0.15));
   z-index: -1;
-  opacity: 0.7;
 }
 
 .content {
-  z-index: 1;
-  color: var(--text-color);
-  padding: 1rem;
-  max-width: 90%;
+  max-width: 900px;
+  z-index: 2;
+  width: 100%;
+  padding: 0 1rem;
 }
 
-.content h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font size */
-  margin-bottom: 1rem;
+/* === TITLE — NO CLS, NO OVERFLOW === */
+.title {
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.5px;
+  min-height: 3.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.content p {
-  font-size: clamp(1rem, 3vw, 1.75rem);
-  margin-bottom: 2rem;
+.titleWrapper {
+  width: 100%;
+  min-height: 3.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
 }
 
-.cta {
-  background: linear-gradient(90deg, var(--accent-color), #ff33cc);
-  color: #fff;
-  border: none;
-  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
-  font-size: clamp(0.875rem, 2vw, 1rem);
-  cursor: pointer;
+.typingText {
+  display: inline;
+  word-break: break-word;
+  hyphens: auto;
+  text-align: center;
+  width: 100%;
+}
+
+/* === TAGLINE === */
+.tagline {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 auto 2.5rem;
+  max-width: 700px;
+  opacity: 0.95;
+}
+
+/* === CTA GROUP === */
+.ctaGroup {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+/* PRIMARY BUTTON — BOUNCING ARROW */
+.btnPrimary {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
   text-decoration: none;
-  border-radius: 4px;
-  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 56px;
+  white-space: nowrap;
+  background: #646cff;
+  color: white;
+  box-shadow: 0 4px 20px rgba(100,108,255,0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cta:hover {
-  transform: scale(1.05);
+.btnPrimary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(100,108,255,0.5);
 }
 
-/* Small screens */
-@media (max-width: 600px) {
-  .content h1 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-  }
-  .content p {
-    font-size: clamp(0.875rem, 4vw, 1rem);
-  }
-  .cta {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
+.arrow {
+  font-weight: bold;
+  display: inline-block;
 }
 
-/* Wide screens */
-@media (min-width: 1200px) {
-  .content {
-    max-width: 70%;
+/* SECONDARY BUTTON — PULSE GLOW + BADGE + TOOLTIP */
+.btnSecondary {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 56px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 2.5px solid rgba(255, 255, 255, 0.7);
+  color: white;
+  animation: pulseGlow 2.8s infinite;
+}
+
+.btnSecondary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from 0deg, #646cff, #ff6bcb, #646cff);
+  border-radius: 14px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.btnSecondary:hover::before {
+  opacity: 0.7;
+}
+
+.btnSecondary:hover {
+  transform: translateY(-4px);
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 9px;
+  right: 6px;
+  background: #ff4757;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 20px;
+  animation: badgePulse 2s infinite;
+  clip-path: inset(0 round 16px);
+}
+
+/* TOOLTIP */
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1a1a1a;
+}
+
+/* ANIMATIONS */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(100, 108, 255, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(100, 108, 255, 0); }
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* SCROLL HINT */
+.scrollHint {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  animation: bounce 2s infinite;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+/* === MOBILE === */
+@media (max-width: 640px) {
+  .title {
+    min-height: 4.8em;
   }
-  .content h1 {
-    font-size: 4rem;
+  .titleWrapper {
+    min-height: 4.8em;
+    padding: 0 0.5rem;
   }
-  .content p {
-    font-size: 2rem;
+  .ctaGroup {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btnPrimary, .btnSecondary {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
   }
 }

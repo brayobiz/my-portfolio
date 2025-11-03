@@ -1,30 +1,12 @@
 // Path: src/components/Nav.js
-import { useState, useCallback, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-scroll';
 import { FaGithub, FaSun, FaMoon } from 'react-icons/fa';
+import { AppContext } from '../context/ThemeContext';
 import styles from './Nav.module.css';
 
 const Nav = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-  const [isToggling, setIsToggling] = useState(false);
-
-  const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
-
-  const toggleTheme = () => {
-    setIsToggling(true);
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    console.log('Toggling theme to:', newTheme);
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(storedTheme);
-    document.documentElement.setAttribute('data-theme', storedTheme);
-  }, []);
+  const { theme, toggleTheme, isMenuOpen, toggleMenu } = useContext(AppContext);
 
   return (
     <header className={styles.header}>
@@ -36,6 +18,7 @@ const Nav = () => {
           loading="lazy"
         />
       </div>
+
       <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}>
         <ul>
           <li>
@@ -45,7 +28,7 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Home
             </Link>
@@ -57,7 +40,7 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Projects
             </Link>
@@ -69,7 +52,7 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               About
             </Link>
@@ -81,7 +64,7 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               My Services
             </Link>
@@ -93,7 +76,7 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Testimonials
             </Link>
@@ -105,7 +88,7 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               My Blog
             </Link>
@@ -117,15 +100,16 @@ const Nav = () => {
               duration={500}
               activeClass={styles.active}
               spy={true}
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Contact Me
             </Link>
           </li>
         </ul>
       </nav>
+
       <div className={styles.actions}>
-        <label className={`${styles.themeToggle} ${isToggling ? styles.toggling : ''}`}>
+        <label className={styles.themeToggle}>
           <input
             type="checkbox"
             checked={theme === 'dark'}
@@ -140,19 +124,25 @@ const Nav = () => {
             )}
           </span>
         </label>
+
         <a
           href="https://github.com/brayobiz"
           aria-label="GitHub profile"
           className={styles.socialLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <FaGithub className={styles.socialIcon} />
         </a>
+
         <button
           className={styles.hamburger}
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </header>

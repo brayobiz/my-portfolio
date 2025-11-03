@@ -65,7 +65,7 @@ const Contact = () => {
       const result = await response.json();
 
       if (result.success) {
-        setStatus('Thank you! Your message has been sent.');
+        setStatus('Thank you! Your message was sent. Book a quick 15-min consult here.');
         resetForm();
         // Clear the status message after 3 seconds
         setTimeout(() => {
@@ -210,8 +210,13 @@ const Contact = () => {
             </Form>
             {status && (
               <div className={`${styles.statusContainer} ${styles.fade}`} data-aos="fade-up">
-                <p className={styles.status}>{status}</p>
-              </div>
+              <p className={styles.status}>{status}</p>
+              <div style={{ marginTop: 12 }}>
+              <a href="https://calendly.com/YOUR-CALENDLY" target="_blank" rel="noreferrer" className={styles.submitButton}>
+                 Book 15-min consult
+                </a>
+                </div>
+                </div>
             )}
           </>
         )}
