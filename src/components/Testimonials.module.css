@@ -1,177 +1,118 @@
-/* Path: src/components/Testimonials.module.css */
 .testimonials {
-  padding: clamp(2rem, 5vw, 4rem) 0;
-  text-align: center;
-  background: var(--bg-color);
-  min-height: fit-content;
+  padding: clamp(3rem, 6vw, 6rem) 1.5rem;
+  background: radial-gradient(circle at top left, #f8f9ff, #eef0ff 60%, #ffffff);
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .header {
-  margin-bottom: clamp(5rem, 8vw, 6rem);
-  padding: 1rem 0 2rem;
-  width: 100%;
-  max-width: clamp(300px, 90vw, 800px);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  max-width: 700px;
 }
 
 .header h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(90deg, #1a1a1a, #646cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
-  color: var(--text-color);
-  text-shadow: 0 0 10px var(--accent-color);
-  font-weight: 700;
 }
 
 .header p {
+  color: #555;
   font-size: clamp(1rem, 2.5vw, 1.2rem);
-  color: var(--text-color);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .swiper {
   width: 100%;
-  max-width: clamp(300px, 98vw, 1200px);
-  padding-bottom: 3rem; /* Space for pagination */
+  max-width: 1200px;
+  padding-bottom: 3rem;
 }
 
-.testimonialCard {
-  background: rgba(255, 255, 255, 0.12);
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2rem;
-  text-align: center;
-  border: 1px solid var(--accent-color);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(100, 108, 255, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%; /* Ensure consistent height */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  height: 100%;
 }
 
-.testimonialCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px var(--accent-color);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(100, 108, 255, 0.15);
 }
 
-.profilePic {
-  width: 50px;
-  height: 50px;
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
-  margin: 0 auto 1rem;
-  border: 2px solid var(--accent-color);
-  box-shadow: 0 0 10px var(--accent-color);
+  border: 2px solid #646cff;
+  box-shadow: 0 0 15px rgba(100, 108, 255, 0.2);
+  object-fit: cover;
+}
+
+.profile h3 {
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .rating {
-  font-size: 1.2rem;
-  color: #ffd700; /* Gold color for stars */
-  margin-bottom: 1rem;
-  text-shadow: 0 0 5px var(--accent-color);
+  display: flex;
+  gap: 0.25rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .review {
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  color: var(--text-color);
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  flex-grow: 1; /* Ensure review takes available space */
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: #333;
+  line-height: 1.7;
+  flex-grow: 1;
 }
 
-.name {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  color: var(--text-color);
-  font-weight: 500;
-  text-shadow: 0 0 5px var(--accent-color);
-}
-
-/* Swiper navigation and pagination styles */
-:global(.swiper-button-next),
-:global(.swiper-button-prev) {
-  color: var(--accent-color);
-  text-shadow: 0 0 5px var(--accent-color);
-}
-
-:global(.swiper-button-next:hover),
-:global(.swiper-button-prev:hover) {
-  color: #ff33cc;
-  text-shadow: 0 0 10px #ff33cc;
-}
-
+/* Pagination styling */
 :global(.swiper-pagination-bullet) {
-  background: var(--accent-color);
-  opacity: 0.5;
+  background: rgba(100, 108, 255, 0.4);
+  transition: all 0.3s ease;
 }
 
 :global(.swiper-pagination-bullet-active) {
-  background: #ff33cc;
-  opacity: 1;
-  box-shadow: 0 0 5px var(--accent-color);
+  background: #646cff;
+  box-shadow: 0 0 6px rgba(100, 108, 255, 0.6);
 }
 
-/* Small screens */
-@media (max-width: 600px) {
-  .testimonials {
-    padding: 2rem 0;
-  }
-  .header {
-    margin-bottom: 3rem;
-    padding-bottom: 1rem;
-  }
-  .header h2 {
-    font-size: 1.8rem;
-  }
-  .header p {
-    font-size: 0.9rem;
-  }
-  .swiper {
-    max-width: 100%;
-    padding-bottom: 2.5rem;
-  }
-  .testimonialCard {
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .card {
     padding: 1.5rem;
   }
-  .profilePic {
-    width: 40px;
-    height: 40px;
+  .avatar {
+    width: 45px;
+    height: 45px;
   }
-  .rating {
-    font-size: 1rem;
-  }
-  .review {
-    font-size: 0.9rem;
-  }
-  .name {
-    font-size: 1rem;
-  }
-}
-
-/* Medium screens */
-@media (min-width: 601px) and (max-width: 1199px) {
-  .testimonials {
-    padding: 3rem 0;
-  }
-  .header {
-    margin-bottom: 4rem;
-  }
-  .swiper {
-    max-width: 98%;
-  }
-  .testimonialCard {
-    padding: 1.75rem;
-  }
-}
-
-/* Wide screens (Desktop mode) */
-@media (min-width: 1200px) {
-  .testimonials {
-    padding: 4rem 0;
-  }
-  .header {
-    margin-bottom: 5rem;
-  }
-  .swiper {
-    max-width: 1200px;
+  .header h2 {
+    font-size: 2rem;
   }
 }
