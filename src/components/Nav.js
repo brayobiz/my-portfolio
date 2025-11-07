@@ -1,152 +1,84 @@
-// Path: src/components/Nav.js
-import { useContext } from 'react';
-import { Link } from 'react-scroll';
-import { FaGithub, FaSun, FaMoon } from 'react-icons/fa';
-import { AppContext } from '../context/ThemeContext';
-import styles from './Nav.module.css';
+import { useState, useEffect } from "react";
+import { Link } from "react-scroll";
+import styles from "./Nav.module.css";
+import { FaBars, FaTimes } from "react-icons/fa";
 
-const Nav = () => {
-  const { theme, toggleTheme, isMenuOpen, toggleMenu } = useContext(AppContext);
+export default function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 60);
+
+      // Hide nav when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
+
+  const navItems = [
+    { name: "Home", to: "home" },
+    { name: "About", to: "about" },
+    { name: "Projects", to: "projects" },
+    { name: "Services", to: "services" },
+    { name: "Contact", to: "contact" },
+  ];
 
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <img
-          src="/assets/images/logo.webp"
-          alt="Vexor portfolio logo"
-          className={styles.logoImage}
-          loading="lazy"
-        />
-      </div>
-
-      <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}>
-        <ul>
-          <li>
-            <Link
-              to="home"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="projects"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="about"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="services"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              My Services
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="testimonials"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              Testimonials
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="blog"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              My Blog
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="contact"
-              smooth={true}
-              duration={500}
-              activeClass={styles.active}
-              spy={true}
-              onClick={toggleMenu}
-            >
-              Contact Me
-            </Link>
-          </li>
-        </ul>
-      </nav>
-
-      <div className={styles.actions}>
-        <label className={styles.themeToggle}>
-          <input
-            type="checkbox"
-            checked={theme === 'dark'}
-            onChange={toggleTheme}
-            aria-label="Toggle light or dark theme"
-          />
-          <span className={styles.slider}>
-            {theme === 'light' ? (
-              <FaSun className={styles.themeIcon} />
-            ) : (
-              <FaMoon className={styles.themeIcon} />
-            )}
-          </span>
-        </label>
-
-        <a
-          href="https://github.com/brayobiz"
-          aria-label="GitHub profile"
-          className={styles.socialLink}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaGithub className={styles.socialIcon} />
-        </a>
+    <header
+      className={`${styles.navbar} 
+        ${scrolled ? styles.scrolled : ""} 
+        ${hidden ? styles.hidden : ""}`}
+      role="banner"
+    >
+      <nav className={styles.navContainer} role="navigation" aria-label="Main">
+        <div className={styles.logo}>Vexor</div>
 
         <button
-          className={styles.hamburger}
+          className={styles.menuToggle}
           onClick={toggleMenu}
-          aria-label="Toggle menu"
+          aria-controls="primary-navigation"
+          aria-expanded={menuOpen}
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
-      </div>
+
+        <ul
+          id="primary-navigation"
+          className={`${styles.navLinks} ${menuOpen ? styles.active : ""}`}
+        >
+          {navItems.map((item) => (
+            <li key={item.to} className={styles.navItem}>
+              <Link
+                to={item.to}
+                smooth={true}
+                duration={500}
+                offset={-70}
+                spy={true}
+                onClick={closeMenu}
+                tabIndex={0}
+                role="menuitem"
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
-};
-
-export default Nav;
+}

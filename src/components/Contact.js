@@ -1,226 +1,204 @@
-// Path: src/components/Contact.js
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import styles from './Contact.module.css';
+import { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import styles from "./Contact.module.css";
+
+const MAX_FILE_SIZE_MB = 5;
 
 const Contact = () => {
+  const [success, setSuccess] = useState(false);
+  const [serverError, setServerError] = useState(false);
+
   const initialValues = {
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    budget: '',
-    timeline: '',
-    service: '',
-    message: '',
-    botcheck: false, // Honeypot field for Web3Forms
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    budget: "",
+    timeline: "",
+    service: "",
+    message: "",
+    file: null,
+    botcheck: false,
   };
 
   const validate = (values) => {
     const errors = {};
-    if (!values.name) {
-      errors.name = 'Name is required';
-    }
+    if (!values.name.trim()) errors.name = "Your name is required.";
     if (!values.email) {
-      errors.email = 'Email is required';
+      errors.email = "Your email is required.";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
+      errors.email = "Please enter a valid email.";
     }
-    if (!values.service) {
-      errors.service = 'Please select a service';
-    }
-    if (!values.message) {
-      errors.message = 'Message is required';
+    if (!values.service) errors.service = "Please select a service.";
+    if (!values.message.trim()) errors.message = "Please enter a message.";
+    if (values.file) {
+      const sizeMB = values.file.size / (1024 * 1024);
+      const allowedTypes = ["image/png", "image/jpeg", "application/pdf"];
+      if (sizeMB > MAX_FILE_SIZE_MB)
+        errors.file = `File must be under ${MAX_FILE_SIZE_MB} MB.`;
+      else if (!allowedTypes.includes(values.file.type))
+        errors.file = "Only PNG, JPG, or PDF files are allowed.";
     }
     return errors;
   };
 
   const handleSubmit = async (values, { setSubmitting, resetForm, setStatus }) => {
-    setStatus('');
+    setStatus("");
+    setServerError(false);
     setSubmitting(true);
 
-    // Prepare form data for Web3Forms
-    const formData = {
-      access_key: 'dbe8deb1-6dea-4015-803b-4eeaab7ca47b', // Your Web3Forms access key
-      name: values.name,
-      email: values.email,
-      phone: values.phone || 'Not provided',
-      company: values.company || 'Not provided',
-      budget: values.budget || 'Not provided',
-      timeline: values.timeline || 'Not provided',
-      service: values.service,
-      message: values.message,
-      botcheck: values.botcheck, // Honeypot field (should be false)
-    };
-
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const formData = new FormData();
+      formData.append("access_key", "dbe8deb1-6dea-4015-803b-4eeaab7ca47b");
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("phone", values.phone || "Not provided");
+      formData.append("company", values.company || "Not provided");
+      formData.append("budget", values.budget || "Not provided");
+      formData.append("timeline", values.timeline || "Not provided");
+      formData.append("service", values.service);
+      formData.append("message", values.message);
+      if (values.file) formData.append("file", values.file);
 
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
       const result = await response.json();
 
       if (result.success) {
-        setStatus('Thank you! Your message was sent. Book a quick 15-min consult here.');
+        setSuccess(true);
+        setStatus("✅ Message sent successfully!");
         resetForm();
-        // Clear the status message after 3 seconds
-        setTimeout(() => {
-          setStatus('');
-        }, 3000);
+        setTimeout(() => setSuccess(false), 2500);
       } else {
-        setStatus('Oops! Something went wrong. Please try again.');
+        setServerError(true);
+        setStatus("⚠️ Something went wrong — please try again.");
       }
     } catch (error) {
-      console.error('Form submission error:', error);
-      setStatus('Oops! Something went wrong. Please try again.');
+      console.error(error);
+      setServerError(true);
+      setStatus("❌ Network error — please retry.");
     } finally {
       setSubmitting(false);
+      setTimeout(() => setStatus(""), 5000);
     }
   };
 
   return (
-    <section id="contact" className={styles.contact}>
-      <div className={styles.header}>
-        <h2 data-aos="zoom-in">Get in Touch</h2>
-        <p data-aos="fade-up" data-aos-delay="100">
-          I’d love to hear from you! Drop me a message below.
-        </p>
-      </div>
-      <Formik
-        initialValues={initialValues}
-        validate={validate}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting, status }) => (
-          <>
-            <Form className={styles.form} data-aos="fade-up" data-aos-delay="200">
-              <div className={styles.formRow}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="name">Name</label>
-                  <Field
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your Name"
-                    disabled={isSubmitting}
-                  />
-                  <ErrorMessage name="name" component="div" className={styles.error} />
+    <section id="contact" className={styles.contact} data-aos="fade-up">
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h2 data-aos="zoom-in">Let’s Connect</h2>
+          <p data-aos="fade-up" data-aos-delay="100">
+            Have a project? Attach your brief or mockup below and let’s talk.
+          </p>
+        </div>
+
+        <Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmit}>
+          {({ isSubmitting, status, setFieldValue, values }) => (
+            <>
+              <Form
+                className={`${styles.form} ${serverError ? styles.shake : ""}`}
+                data-aos="fade-up"
+                data-aos-delay="200"
+                aria-live="polite"
+              >
+                <div className={styles.gridTwo}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="name">Full name</label>
+                    <Field id="name" name="name" placeholder="Brian Kangogo" />
+                    <ErrorMessage name="name" component="div" className={styles.error} />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">Email</label>
+                    <Field id="email" name="email" type="email" placeholder="you@example.com" />
+                    <ErrorMessage name="email" component="div" className={styles.error} />
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="email">Email</label>
-                  <Field
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Your Email"
-                    disabled={isSubmitting}
-                  />
-                  <ErrorMessage name="email" component="div" className={styles.error} />
+
+                <div className={styles.gridTwo}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="service">Service</label>
+                    <Field as="select" id="service" name="service">
+                      <option value="" disabled>
+                        Select a service
+                      </option>
+                      <option value="web-development">Web Development</option>
+                      <option value="ui-ux-design">UI/UX Design</option>
+                      <option value="bug-fixing">Bug Fixing</option>
+                      <option value="email-template">Email Template Design</option>
+                      <option value="other">Other</option>
+                    </Field>
+                    <ErrorMessage name="service" component="div" className={styles.error} />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="budget">Budget (optional)</label>
+                    <Field id="budget" name="budget" placeholder="e.g., $500–$1,000" />
+                  </div>
                 </div>
-              </div>
-              <div className={styles.formRow}>
+
                 <div className={styles.formGroup}>
-                  <label htmlFor="phone">Phone Number (Optional)</label>
+                  <label htmlFor="message">Message</label>
                   <Field
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="Your Phone Number"
-                    disabled={isSubmitting}
+                    as="textarea"
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="Tell me about your project..."
                   />
+                  <ErrorMessage name="message" component="div" className={styles.error} />
                 </div>
+
+                {/* 📎 File Upload */}
                 <div className={styles.formGroup}>
-                  <label htmlFor="company">Company/Organization (Optional)</label>
-                  <Field
-                    type="text"
-                    id="company"
-                    name="company"
-                    placeholder="Your Company"
-                    disabled={isSubmitting}
+                  <label htmlFor="file">Attach file (optional)</label>
+                  <input
+                    id="file"
+                    name="file"
+                    type="file"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onChange={(e) => setFieldValue("file", e.currentTarget.files[0])}
                   />
+                  {values.file && (
+                    <p className={styles.fileInfo}>
+                      {values.file.name} ({(values.file.size / 1024 / 1024).toFixed(2)} MB)
+                    </p>
+                  )}
+                  <ErrorMessage name="file" component="div" className={styles.error} />
                 </div>
-              </div>
-              <div className={styles.formRow}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="service">Service</label>
-                  <Field
-                    as="select"
-                    id="service"
-                    name="service"
+
+                <div className={styles.formActions}>
+                  <button
+                    type="submit"
+                    className={`${styles.submitButton} ${success ? styles.success : ""}`}
                     disabled={isSubmitting}
                   >
-                    <option value="" disabled>Select a service</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="ui-ux-design">UI/UX Design</option>
-                    <option value="bug-fixing">Bug Fixing</option>
-                    <option value="email-template-design">Email Template Design</option>
-                    <option value="other">Other</option>
-                  </Field>
-                  <ErrorMessage name="service" component="div" className={styles.error} />
+                    {isSubmitting ? "Sending..." : success ? "Sent" : "Send Message"}
+                  </button>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="budget">Budget Range (Optional)</label>
-                  <Field
-                    type="text"
-                    id="budget"
-                    name="budget"
-                    placeholder="e.g., $500-$1000"
-                    disabled={isSubmitting}
-                  />
+              </Form>
+
+              {status && (
+                <div className={styles.statusContainer}>    <p className={styles.status}>{status}</p>
+                {status.startsWith("✅") && (
+                  <a
+                    href="https://calendly.com/YOUR-CALENDLY"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.consultButton}
+                    >
+                    Book 15-min consult →
+      </a>
+    )}
                 </div>
-              </div>
-              <div className={styles.formRow}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="timeline">Project Timeline (Optional)</label>
-                  <Field
-                    type="text"
-                    id="timeline"
-                    name="timeline"
-                    placeholder="e.g., 2 weeks"
-                    disabled={isSubmitting}
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  {/* Empty div to maintain layout balance */}
-                </div>
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="message">Message</label>
-                <Field
-                  as="textarea"
-                  id="message"
-                  name="message"
-                  placeholder="Your Message"
-                  rows="5"
-                  disabled={isSubmitting}
-                />
-                <ErrorMessage name="message" component="div" className={styles.error} />
-              </div>
-              <button
-                type="submit"
-                className={styles.submitButton}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </button>
-            </Form>
-            {status && (
-              <div className={`${styles.statusContainer} ${styles.fade}`} data-aos="fade-up">
-              <p className={styles.status}>{status}</p>
-              <div style={{ marginTop: 12 }}>
-              <a href="https://calendly.com/YOUR-CALENDLY" target="_blank" rel="noreferrer" className={styles.submitButton}>
-                 Book 15-min consult
-                </a>
-                </div>
-                </div>
-            )}
-          </>
-        )}
-      </Formik>
+              )}
+            </>
+          )}
+        </Formik>
+      </div>
     </section>
   );
 };

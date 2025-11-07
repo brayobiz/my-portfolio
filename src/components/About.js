@@ -1,4 +1,5 @@
 import styles from './About.module.css';
+import { Download } from 'lucide-react';
 
 const About = () => {
   return (
@@ -56,6 +57,10 @@ const About = () => {
             Looking for a developer who treats your project like their own?
             <br />Let’s build something extraordinary together. 🚀
           </p>
+          <a href="public/Brian_Kipkoech_Kangogo_CV.docx" download className={styles.cvButton}>
+            <Download className={styles.icon} aria-hidden="true" />
+            <span>Download CV</span>
+            </a>
         </div>
       </div>
     </section>

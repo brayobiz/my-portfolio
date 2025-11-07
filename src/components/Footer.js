@@ -97,9 +97,10 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <p className={styles.copyright}>
-          © 2025 Vexor. All rights reserved.
-        </p>
+        <div className={styles.footerBottom}>
+            <p>© 2025 <span>Vexor</span>. All rights reserved.</p>
+            <p>Designed & Built by <span>Brian Kangogo</span></p>
+        </div>
       </footer>
       <button
         onClick={handleBackToTop}

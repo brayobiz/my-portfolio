@@ -1,0 +1,26 @@
+[
+  {
+    "id": "delix-restaurant-app",
+    "title": "Building a Restaurant Reservation App with a Galaxy Theme",
+    "excerpt": "I share my journey of creating the Delix Restaurant app — a futuristic reservation platform with a galaxy-inspired design using React and Firebase.",
+    "content": "The Delix project was inspired by a desire to merge the futuristic galaxy aesthetic with functional app design. I started by sketching moodboards in Figma and then brought it to life in React. Firebase handled authentication and real-time reservations. The biggest challenge was performance optimization, especially with background animations, which I solved with lazy loading and compression. This project helped me master UI consistency and modern front-end principles.",
+    "thumbnail": "assets/images/delix-1.jpeg",
+    "date": "April 15, 2025"
+  },
+  {
+    "id": "ku-hub-optimization",
+    "title": "How I Optimized KU Hub for Kenyatta University Students",
+    "excerpt": "A breakdown of how I built and optimized KU Hub — a student portal focused on performance, accessibility, and user-centered design.",
+    "content": "KU Hub was built using Django for the backend and Firebase for student data synchronization. My main goal was to reduce page load times, so I implemented query caching and used React for a smoother front-end experience. The result was a 40% performance boost and higher engagement among students. I also focused on dark-mode UI for visual comfort.",
+    "thumbnail": "assets/images/kuhub-thumbnail.jpg",
+    "date": "March 10, 2025"
+  },
+  {
+    "id": "stunning-email-templates",
+    "title": "Tips for Creating Stunning Email Templates",
+    "excerpt": "My top tips for designing emails that are both functional and visually appealing, with responsiveness and engagement in mind.",
+    "content": "Email design is often overlooked, yet it’s a crucial touchpoint for user engagement. In this article, I go over spacing, typography, and responsive layouts. I use MJML and inline CSS for compatibility across clients. One key takeaway is the importance of testing — each email should render consistently on Outlook, Gmail, and mobile devices.",
+    "thumbnail": "assets/images/email-thumbnail.jpg",
+    "date": "February 20, 2025"
+  }
+]

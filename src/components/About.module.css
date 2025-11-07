@@ -155,3 +155,49 @@ h2 {
     text-align: center;
   }
 }
+
+.cvButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  animation: shake 3s infinite ease-in-out;
+}
+
+.cvButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Lucide icon styling */
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* 👇 Smooth attention-grabbing shake animation */
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  2% {
+    transform: rotate(5deg);
+  }
+  4% {
+    transform: rotate(-5deg);
+  }
+  6% {
+    transform: rotate(2deg);
+  }
+  8% {
+    transform: rotate(0deg);
+  }
+}
