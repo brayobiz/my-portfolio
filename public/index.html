@@ -14,19 +14,18 @@
     />
     <meta name="author" content="Brian" />
     <meta name="robots" content="index, follow" />
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Brian's Portfolio" />
     <meta
       property="og:description"
       content="Explore Brians's web development projects, featuring React, JavaScript, and modern UI/UX design"
     />
-    <meta
-      property="og:image"
-      content="%PUBLIC_URL%/images/hero-bg.webp"
-    />
+    <meta property="og:image" content="%PUBLIC_URL%/images/hero-bg.webp" />
     <meta property="og:image:alt" content="Portfolio hero background image" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kangogobrian.vercel.app" />
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Brians's Portfolio" />
@@ -34,10 +33,19 @@
       name="twitter:description"
       content="Explore Brian's web development projects"
     />
-    <meta
-      name="twitter:image"
-      content="%PUBLIC_URL%/images/hero-bg.webp"
-    />
+    <meta name="twitter:image" content="%PUBLIC_URL%/images/hero-bg.webp" />
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QWEZWHJC89"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-QWEZWHJC89');
+    </script>
+
     <!-- Preload Critical Resources -->
     <link
       rel="preload"
@@ -50,9 +58,11 @@
       media="print"
       onload="this.media='all'"
     />
+
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/webp" href="%PUBLIC_URL%/image.webp" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.webp" />
+
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
       {
@@ -68,7 +78,9 @@
         "description": "Web developer specializing in React, JavaScript and UI/UX design."
       }
     </script>
+
     <title>Brians's Portfolio</title>
+
     <!-- Preload critical images (if used in above-the-fold content) -->
     <link
       rel="preload"
